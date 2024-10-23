@@ -4,32 +4,77 @@
  */
 package Datos;
 
+import conexion.Conexion;
+import java.util.ArrayList;
+
 /**
  *
  * @author luanzy
  */
-public abstract class Reserva implements Cloneable {
+public abstract class Reserva {
     protected int id;
     protected String nombreCliente;
     protected String hora;
     protected String mesa;
     protected String fecha;
+    protected String estado;
 
-    public Reserva(int id, String nombreCliente, String hora, String mesa, String fecha) {
+    public Reserva(int id, String nombreCliente, String hora, String mesa, String fecha, String estado) {
         this.id = id;
         this.nombreCliente = nombreCliente;
         this.hora = hora;
         this.mesa = mesa;
         this.fecha = fecha;
+        this.estado = estado;
     }
 
-    // Método clonar para implementar el patrón Prototype
-    @Override
-    public abstract Reserva clone();
-
-    // Método para mostrar los detalles de la reserva
-    public void mostrar() {
-        System.out.println("ID: " + id + ", Cliente: " + nombreCliente + ", Hora: " + hora +
-                           ", Mesa: " + mesa + ", Fecha: " + fecha);
+    
+    public abstract String crearReserva();
+    
+    public String eliminarReserva(){
+        Conexion objmod = new Conexion();
+        String cad = "delete from Reserva where id='"+ this.getId()+"'";
+        return objmod.Ejecutar(cad);
     }
+    
+    public abstract String editarReserva();
+    
+     public String completarReserva(){
+        Conexion objmod = new Conexion();
+        String cad = "Update Reserva set estado='" + this.getEstado()+"' where id='"+this.getId()+"'";
+        return objmod.Ejecutar(cad);
+    }
+    
+    public ArrayList<Reserva> listaReserva(){
+        ArrayList<Reserva> listaReserva = new ArrayList(); 
+        return listaReserva;
+    }
+    
+    
+    //Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public String getMesa() {
+        return mesa;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+    
+    
 }

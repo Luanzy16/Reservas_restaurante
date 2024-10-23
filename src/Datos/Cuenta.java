@@ -10,19 +10,15 @@ package Datos;
  */
 public abstract class Cuenta {
     private int id;
-    private String nombre;
-    private String apellido;
+    private String nombreUsuario;
+    private String contraseña;
     private String email;
     
     
-    public String nuevaCuenta(){
-        return "";
-    }
     
-    public String eliminarCuenta(){
-        return "";
-    }
-
+    public abstract String nuevaCuenta();
+    
+    public abstract String buscarCuenta();
     
     //Getters & Setters
     public int getId() {
@@ -33,21 +29,22 @@ public abstract class Cuenta {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
+
 
     public String getEmail() {
         return email;

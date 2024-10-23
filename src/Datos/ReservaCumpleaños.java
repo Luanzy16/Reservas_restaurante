@@ -4,26 +4,37 @@
  */
 package Datos;
 
+import conexion.Conexion;
+
 /**
  *
  * @author luanzy
  */
 public class ReservaCumpleaños extends Reserva {
-    private String mensajeCumpleaños;  // Atributo adicional específico para esta reserva
+    private String nombreEvento;  
 
-    public ReservaCumpleaños(int id, String nombreCliente, String hora, String mesa, String fecha, String mensajeCumpleaños) {
-        super(id, nombreCliente, hora, mesa, fecha);
-        this.mensajeCumpleaños = mensajeCumpleaños;
+    public ReservaCumpleaños(int id, String nombreCliente, String hora, String mesa, String fecha,String estado, String nombreEvento) {
+        super(id, nombreCliente, hora, mesa, fecha, estado);
+        this.nombreEvento = nombreEvento;
     }
 
     @Override
-    public ReservaCumpleaños clone() {
-        return new ReservaCumpleaños(id, nombreCliente, hora, mesa, fecha, mensajeCumpleaños);
+    public String crearReserva() {
+        Conexion objmod = new Conexion();
+        String cad = "insert into Reserva values('"+ this.getId()+"','"+this.getNombreCliente()+"','"+this.getHora()+"','"+this.getMesa()+"','"+this.getEstado()+"','"+this.getNombreEvento()+"')";
+        return objmod.Ejecutar(cad);
     }
 
     @Override
-    public void mostrar() {
-        super.mostrar();
-        System.out.println(", Mensaje Cumpleaños: " + mensajeCumpleaños);
+    public String editarReserva() {
+        Conexion objmod = new Conexion();
+        String cad = "Update Reserva set nombreCliente='" + this.getNombreCliente()+"',hora=' "+ this.getHora()+ "',mesa=' "+ this.getMesa()+ "',fecha=' "+"' where id='"+this.getId()+"'";
+        return objmod.Ejecutar(cad);
     }
+
+    public String getNombreEvento() {
+        return nombreEvento;
+    }
+
+
 }

@@ -4,8 +4,6 @@
  */
 package Datos;
 
-import java.sql.*;
-import java.util.ArrayList;
 import conexion.Conexion;
 
 /**
@@ -14,19 +12,19 @@ import conexion.Conexion;
  */
 public class Cliente extends Cuenta{
     
-    public String crearReserva(){
-        return "";
+
+
+    @Override
+    public String nuevaCuenta() {
+        Conexion objmod = new Conexion();
+        String cad = "insert into cliente values('"+ this.getId()+"','"+this.getNombreUsuario()+"','"+this.getContraseña()+"','"+this.getEmail()+"')";
+        return objmod.Ejecutar(cad);
     }
-    
-    public String eliminarReserva(){
-        return "";
-    }
-    
-    public String editarReserva(){
-        return "";
-    }
-    
-    public ArrayList<Reserva> listaReserva(){
-        return listaReserva;
+
+    @Override
+    public String buscarCuenta() {
+        Conexion objmod = new Conexion();
+        String cad = "SELECT * FROM cliente WHERE id ="+this.getId();
+        return objmod.Ejecutar(cad);
     }
 }

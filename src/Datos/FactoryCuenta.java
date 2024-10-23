@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author luanzy
  */
-public class FactoryEmpleados {
+public class FactoryCuenta {
     
     public Cuenta getCuenta(String tipoCuenta){
         if(Objects.equals(tipoCuenta, "Empleado")){
