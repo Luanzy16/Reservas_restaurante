@@ -13,11 +13,11 @@ import java.util.Objects;
 public class FactoryCuenta {
     
     public Cuenta getCuenta(String tipoCuenta){
-        if(Objects.equals(tipoCuenta, "Empleado")){
+        if(Objects.equals(tipoCuenta, "empleado")){
             return new Empleado();
         }
         
-        if(Objects.equals(tipoCuenta, "Cliente")){
+        if(Objects.equals(tipoCuenta, "cliente")){
             return new Cliente();
         }
         

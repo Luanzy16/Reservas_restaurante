@@ -12,9 +12,9 @@ import java.sql.*;
  * @author luanzy
  */
 public class Conexion {
-    private final String url = "jdbc:mysql://localhost:3306/Restaurante";
-    private final String user = "root";
-    private final String pwd =  "";
+    private static final String url = "jdbc:mysql://localhost:3306/Restaurante";
+    private static final String user = "root";
+    private static final String pwd =  "";
     
     public Conexion(){}
     
@@ -57,6 +57,10 @@ public class Conexion {
             javax.swing.JOptionPane.showMessageDialog(null, e.getMessage());
             return "Error" + e.getMessage();
         }  
+    }
+    
+     public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, user, pwd);
     }
     
     

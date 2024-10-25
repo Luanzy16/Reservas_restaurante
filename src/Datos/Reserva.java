@@ -30,6 +30,8 @@ public abstract class Reserva {
 
     
     public abstract String crearReserva();
+    public abstract ArrayList<ReservaAniversario> listaReserva();
+    public abstract String editarReserva();
     
     public String eliminarReserva(){
         Conexion objmod = new Conexion();
@@ -37,18 +39,8 @@ public abstract class Reserva {
         return objmod.Ejecutar(cad);
     }
     
-    public abstract String editarReserva();
     
-     public String completarReserva(){
-        Conexion objmod = new Conexion();
-        String cad = "Update Reserva set estado='" + this.getEstado()+"' where id='"+this.getId()+"'";
-        return objmod.Ejecutar(cad);
-    }
-    
-    public ArrayList<Reserva> listaReserva(){
-        ArrayList<Reserva> listaReserva = new ArrayList(); 
-        return listaReserva;
-    }
+  
     
     
     //Getters
@@ -75,6 +67,32 @@ public abstract class Reserva {
     public String getEstado() {
         return estado;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public void setMesa(String mesa) {
+        this.mesa = mesa;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
     
     
 }

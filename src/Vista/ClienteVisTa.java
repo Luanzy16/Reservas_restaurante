@@ -4,6 +4,12 @@
  */
 package Vista;
 
+import Datos.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+
+
 /**
  *
  * @author luanzy
@@ -16,6 +22,9 @@ public class ClienteVisTa extends javax.swing.JFrame {
     public ClienteVisTa() {
         initComponents();
     }
+    
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,12 +37,83 @@ public class ClienteVisTa extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        idJT = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        nombreJT = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        horaJT = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        mesaJT = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        fechaJT = new javax.swing.JTextPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        estadoJT = new javax.swing.JTextPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tiporeservaJT = new javax.swing.JTextPane();
+        agregarJB = new javax.swing.JButton();
+        editarJB = new javax.swing.JButton();
+        eliminarJb = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Porfavor ingresa los datos de tu reserva:");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("id");
+
+        jLabel3.setText("Nombre");
+
+        jLabel4.setText("hora");
+
+        jLabel5.setText("mesa");
+
+        jLabel7.setText("fecha");
+
+        jLabel8.setText("estado");
+
+        jLabel9.setText("tipoReserva");
+
+        jScrollPane1.setViewportView(idJT);
+
+        jScrollPane2.setViewportView(nombreJT);
+
+        jScrollPane3.setViewportView(horaJT);
+
+        jScrollPane4.setViewportView(mesaJT);
+
+        jScrollPane5.setViewportView(fechaJT);
+
+        jScrollPane6.setViewportView(estadoJT);
+
+        jScrollPane7.setViewportView(tiporeservaJT);
+
+        agregarJB.setText("Agregar");
+        agregarJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarJBActionPerformed(evt);
+            }
+        });
+
+        editarJB.setText("Editar");
+        editarJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarJBActionPerformed(evt);
+            }
+        });
+
+        eliminarJb.setText("eliminar");
+        eliminarJb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarJbActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -42,25 +122,139 @@ public class ClienteVisTa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(jLabel2)))
-                .addContainerGap(494, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane5)
+                            .addComponent(jScrollPane6)
+                            .addComponent(jScrollPane7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(agregarJB, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(editarJB, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(eliminarJb, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(39, 39, 39)
+                                                .addComponent(jLabel2))
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(agregarJB)
+                    .addComponent(editarJB)
+                    .addComponent(eliminarJb))
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void eliminarJbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarJbActionPerformed
+      String id = JOptionPane.showInputDialog("ingresa el id de la reserva que deseas eliminar: ");
+      
+      
+     int rec = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar la reserva? "+ this.nombreJT.getText());
+        
+        if (rec == 0){
+            ReservaBuilder builder = new ReservaBuilder();
+            Reserva reserva = builder.setId(Integer.parseInt(id))
+                                    .setNombreCliente("")
+                                    .setHora("")
+                                    .setMesa("")
+                                    .setEstado("")
+                                    .setFecha("")
+                                    .setNombreEvento("")
+                                    .buildAniversario();
+            JOptionPane.showMessageDialog(null, reserva.eliminarReserva());
+      }
+         
+    }//GEN-LAST:event_eliminarJbActionPerformed
+
+    private void editarJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJBActionPerformed
+        ReservaBuilder builder = new ReservaBuilder();
+        Reserva reserva = builder.setId(Integer.parseInt(this.idJT.getText()))
+                                    .setNombreCliente(this.nombreJT.getText())
+                                    .setHora(this.horaJT.getText())
+                                    .setMesa(this.mesaJT.getText())
+                                    .setEstado(this.estadoJT.getText())
+                                    .setFecha(this.fechaJT.getText())
+                                    .setNombreEvento(this.tiporeservaJT.getText())
+                                    .buildAniversario();
+        
+        JOptionPane.showMessageDialog(null, reserva.editarReserva());
+    }//GEN-LAST:event_editarJBActionPerformed
+
+    private void agregarJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJBActionPerformed
+        ReservaBuilder builder = new ReservaBuilder();
+        
+        Reserva reserva = builder.setId(Integer.parseInt(this.idJT.getText()))
+                                    .setNombreCliente(this.nombreJT.getText())
+                                    .setHora(this.horaJT.getText())
+                                    .setMesa(this.mesaJT.getText())
+                                    .setFecha(this.fechaJT.getText())
+                                    .setEstado(this.estadoJT.getText())
+                                    .setNombreEvento(this.tiporeservaJT.getText())
+                                    .buildAniversario();
+        
+        JOptionPane.showMessageDialog(null, reserva.crearReserva());
+    }//GEN-LAST:event_agregarJBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +293,31 @@ public class ClienteVisTa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarJB;
+    private javax.swing.JButton editarJB;
+    private javax.swing.JButton eliminarJb;
+    private javax.swing.JTextPane estadoJT;
+    private javax.swing.JTextPane fechaJT;
+    private javax.swing.JTextPane horaJT;
+    private javax.swing.JTextPane idJT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTextPane mesaJT;
+    private javax.swing.JTextPane nombreJT;
+    private javax.swing.JTextPane tiporeservaJT;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,11 @@
 package Datos;
 
 import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,7 +17,7 @@ import conexion.Conexion;
  */
 public class Empleado extends Cuenta{
     private int salario = 2000000;
-    private boolean admin = true;
+    private final boolean admin = true;
     
     //Getters & Setters
     public int getSalario() {
@@ -27,23 +32,40 @@ public class Empleado extends Cuenta{
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
     @Override
     public String nuevaCuenta() {
         Conexion objmod = new Conexion();
-        String cad = "insert into Empleado values('"+ this.getId()+"','"+this.getNombreUsuario()+"','"+this.getContraseña()+"','"+this.getEmail()+"','"+this.getSalario()+"','"+this.isAdmin()+"')";
+        String cad = "insert into Empleado values("+ this.getId()+",'"+this.getNombreUsuario()+"','"+this.getContraseña()+"','"+this.getEmail()+"','"+this.getSalario()+"')";
         return objmod.Ejecutar(cad);
-    }
-
-    @Override
-    public String buscarCuenta() {
-       Conexion objmod = new Conexion();
-       String cad = "SELECT * FROM Empleado WHERE id ="+this.getId();
-        return objmod.Ejecutar(cad);
-    }
+    }  
     
+    public ArrayList<Empleado> ListaEmpleado(){
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        String query = "SELECT * FROM Empleado";
+
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombreUsuario");
+                String contrasena = rs.getString("contrasena");
+                String email = rs.getString("email");
+
+                Empleado cliente = new Empleado();
+                cliente.setId(id);
+                cliente.setNombreUsuario(nombre);
+                cliente.setContraseña(contrasena);
+                cliente.setEmail(email);
+                empleados.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return empleados;
+    }
     
 }

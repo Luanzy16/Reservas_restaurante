@@ -4,7 +4,12 @@
  */
 package Datos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import conexion.Conexion;
+import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,11 +25,35 @@ public class Cliente extends Cuenta{
         String cad = "insert into cliente values('"+ this.getId()+"','"+this.getNombreUsuario()+"','"+this.getContraseña()+"','"+this.getEmail()+"')";
         return objmod.Ejecutar(cad);
     }
+    
+    
+     public ArrayList<Cliente> ListaCliente(){
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        String query = "SELECT * FROM cliente";
 
-    @Override
-    public String buscarCuenta() {
-        Conexion objmod = new Conexion();
-        String cad = "SELECT * FROM cliente WHERE id ="+this.getId();
-        return objmod.Ejecutar(cad);
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombreUsuario");
+                String contrasena = rs.getString("contrasena");
+                String email = rs.getString("email");
+
+                Cliente cliente = new Cliente();
+                cliente.setId(id);
+                cliente.setNombreUsuario(nombre);
+                cliente.setContraseña(contrasena);
+                cliente.setEmail(email);
+                clientes.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clientes;
     }
+
 }

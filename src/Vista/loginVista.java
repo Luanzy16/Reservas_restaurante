@@ -4,12 +4,16 @@
  */
 package Vista;
 
+import Datos.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luanzy
  */
 public class loginVista extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form loginVista
      */
@@ -31,10 +35,9 @@ public class loginVista extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         IngresarBoton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        usuarioJT = new javax.swing.JTextPane();
         registrarBT = new javax.swing.JButton();
+        contrasenaJT = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,11 +54,16 @@ public class loginVista extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jTextPane1);
-
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane1.setViewportView(usuarioJT);
 
         registrarBT.setText("Registrarse");
+        registrarBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarBTActionPerformed(evt);
+            }
+        });
+
+        contrasenaJT.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +87,7 @@ public class loginVista extends javax.swing.JFrame {
                                 .addComponent(registrarBT)
                                 .addGap(19, 19, 19))
                             .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane2))))
+                            .addComponent(contrasenaJT))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,9 +100,9 @@ public class loginVista extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contrasenaJT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IngresarBoton)
@@ -106,9 +114,64 @@ public class loginVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void IngresarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarBotonActionPerformed
-        // TODO add your handling code here:
+        Cliente cliente = new Cliente();
+         Empleado empleado = new Empleado();
+
+         // Obtenemos el nombre de usuario ingresado en el campo de texto
+         String nombreBuscado = this.usuarioJT.getText();
+
+         // Buscamos en la lista de clientes y empleados
+         String nombreCliente = buscarCliente(cliente.ListaCliente(), nombreBuscado);
+         String nombreEmpleado = buscarEmpleado(empleado.ListaEmpleado(), nombreBuscado);
+
+         // Si se encuentra el nombre en la lista de empleados, abrimos la vista de empleados
+         if (nombreEmpleado != null) {
+             EmpleadoVista b = new EmpleadoVista();
+             b.setVisible(true);
+         } 
+         // Si se encuentra el nombre en la lista de clientes, abrimos la vista de clientes
+         else if (nombreCliente != null) {
+             ClienteVisTa a = new ClienteVisTa();
+             a.setVisible(true);
+         } 
+         // Si no se encuentra en ninguna lista, mostramos un mensaje
+         else {
+        JOptionPane.showMessageDialog(this, "Usuario no encontrado en la lista de empleados ni clientes.");
+    }
+         
+       
     }//GEN-LAST:event_IngresarBotonActionPerformed
 
+    private void registrarBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBTActionPerformed
+
+        RegistrarVista a = new RegistrarVista();
+        a.setVisible(true);
+
+        
+    }//GEN-LAST:event_registrarBTActionPerformed
+
+    public static String buscarCliente(ArrayList<Cliente> lista, String nombreBuscado) {
+        for (Cuenta persona : lista) {
+            if (persona.getNombreUsuario().equalsIgnoreCase(nombreBuscado)) {
+                return persona.getNombreUsuario();
+            }
+        }
+        return null;
+    }
+    
+    
+    public static String buscarEmpleado(ArrayList<Empleado> lista, String nombreBuscado) {
+        for (Cuenta persona : lista) {
+            if (persona.getNombreUsuario().equalsIgnoreCase(nombreBuscado)) {
+                return persona.getNombreUsuario();
+            }
+        }
+        return null;
+    }
+
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -146,13 +209,12 @@ public class loginVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton IngresarBoton;
+    private javax.swing.JPasswordField contrasenaJT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JButton registrarBT;
+    private javax.swing.JTextPane usuarioJT;
     // End of variables declaration//GEN-END:variables
 }

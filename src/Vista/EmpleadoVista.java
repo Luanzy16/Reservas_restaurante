@@ -4,6 +4,13 @@
  */
 package Vista;
 
+import Datos.*;
+import conexion.Conexion;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luanzy
@@ -15,6 +22,7 @@ public class EmpleadoVista extends javax.swing.JFrame {
      */
     public EmpleadoVista() {
         initComponents();
+        listarReserva(tablaReserva);
     }
 
     /**
@@ -28,14 +36,13 @@ public class EmpleadoVista extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        completadoBT = new javax.swing.JButton();
+        tablaReserva = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Reservas Pendientes:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaReserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -46,14 +53,7 @@ public class EmpleadoVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        completadoBT.setText("CompletadoBT");
-        completadoBT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                completadoBTActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tablaReserva);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,33 +66,57 @@ public class EmpleadoVista extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(completadoBT)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(completadoBT)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+        public static void listarReserva(JTable tablaReserva) {
+        // Crear el modelo de la tabla
+        DefaultTableModel tabla = new DefaultTableModel();
+        tabla.addColumn("id");
+        tabla.addColumn("nombreCliente");
+        tabla.addColumn("hora");
+        tabla.addColumn("mesa");
+        tabla.addColumn("fecha");
+        tabla.addColumn("tipoReserva");
 
-    private void completadoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_completadoBTActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_completadoBTActionPerformed
+        // Establecer el modelo en la tabla
+        tablaReserva.setModel(tabla);
 
+        // Conexión y consulta a la base de datos
+        try (Connection conn = Conexion.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Reserva")) {
+
+            // Recorrer los resultados y agregar filas al modelo de la tabla
+            while (rs.next()) {
+                Object[] fila = new Object[8];
+                fila[0] = rs.getInt("id");
+                fila[1] = rs.getString("nombreCliente");
+                fila[2] = rs.getString("hora");
+                fila[3] = rs.getString("mesa");
+                fila[4] = rs.getString("fecha");
+                fila[5] = rs.getString("tipoReserva");  
+
+                tabla.addRow(fila);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -130,9 +154,8 @@ public class EmpleadoVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton completadoBT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaReserva;
     // End of variables declaration//GEN-END:variables
 }

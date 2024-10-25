@@ -18,7 +18,7 @@ public abstract class Cuenta {
     
     public abstract String nuevaCuenta();
     
-    public abstract String buscarCuenta();
+ 
     
     //Getters & Setters
     public int getId() {
