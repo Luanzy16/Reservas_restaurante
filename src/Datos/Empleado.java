@@ -39,6 +39,10 @@ public class Empleado extends Cuenta{
         return objmod.Ejecutar(cad);
     }  
     
+    /**
+     * Funcion que crea una lista con todas los objetos Empleado que esten en la tabla 'Empleado'
+     * @return lista de Empleados
+     */
     public ArrayList<Empleado> ListaEmpleado(){
         ArrayList<Empleado> empleados = new ArrayList<>();
         String query = "SELECT * FROM Empleado";

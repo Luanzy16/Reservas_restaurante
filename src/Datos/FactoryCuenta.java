@@ -12,6 +12,11 @@ import java.util.Objects;
  */
 public class FactoryCuenta {
     
+    /**
+     * Crea un objeto Empleado o cliente 
+     * @param tipoCuenta
+     * @return Empleado o Cliente
+     */
     public Cuenta getCuenta(String tipoCuenta){
         if(Objects.equals(tipoCuenta, "empleado")){
             return new Empleado();

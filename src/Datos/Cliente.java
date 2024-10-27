@@ -27,6 +27,10 @@ public class Cliente extends Cuenta{
     }
     
     
+    /**
+     * Funcion que crea una lista con todas los objetos clientes que esten en la tabla 'cliente'
+     * @return lista de clientes
+     */
      public ArrayList<Cliente> ListaCliente(){
         ArrayList<Cliente> clientes = new ArrayList<>();
         String query = "SELECT * FROM cliente";

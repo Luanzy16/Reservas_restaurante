@@ -27,12 +27,31 @@ public abstract class Reserva {
         this.fecha = fecha;
         this.estado = estado;
     }
-
     
+    /**
+     * Funcion que crea un reserva por medio de una sentencia sql en la base de datos
+     * @return String con la sentecia
+     */
     public abstract String crearReserva();
+    
+    /**
+     * Funcion que crea una lista con todas los objetos Reserva que esten en la tabla 'Reserva'
+     * @return lista de Reserva
+     */
     public abstract ArrayList<ReservaAniversario> listaReserva();
+    
+    
+    /**
+     * Funcion que Editar un reserva por medio de una sentencia sql en la base de datos
+     * @return string con la sentencia
+     */
     public abstract String editarReserva();
     
+    
+    /**
+     * Funcion que Editar un reserva por medio de una sentencia sql en la base de datos
+     * @return string con la sentencia
+     */
     public String eliminarReserva(){
         Conexion objmod = new Conexion();
         String cad = "delete from Reserva where id='"+ this.getId()+"'";

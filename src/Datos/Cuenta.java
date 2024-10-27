@@ -15,7 +15,10 @@ public abstract class Cuenta {
     private String email;
     
     
-    
+    /**
+     * funcion abtracta que crea una nueva cuenta con una sentencia SQL
+     * Return: Ejecucion de la setencia SQL
+    */
     public abstract String nuevaCuenta();
     
  
